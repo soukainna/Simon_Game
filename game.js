@@ -60,7 +60,6 @@ function checkAnswer(currentLevel){
     if(gamePattern[currentLevel] === userClickedPattern[currentLevel])
     {
         console.log("successs")
-        //4. If the user got the most recent answer right in step 3, then check that they have finished their sequence with another if statement.
         if (userClickedPattern.length === gamePattern.length){
     
             //5. Call nextSequence() after a 1000 millisecond delay.
