@@ -14,7 +14,7 @@ $(document).keypress(function() {
     }
 })
 
-$(".btn").click(function(e) {
+$(".btn").click(function() {
     console.log(this)
     var userChosenColour = $(this).attr("id")
      console.log(userChosenColour)
@@ -22,6 +22,8 @@ $(".btn").click(function(e) {
      console.log(userClickedPattern)
      playSound(userChosenColour)
      animatePress(userChosenColour)
+     checkAnswer(userClickedPattern.length - 1)
+     console.log(userClickedPattern.length - 1)
  })
 
 
@@ -43,8 +45,10 @@ function nextSequence() {
     level++
     $("#level-title").text("Level " + level)
     var randomNumber = Math.floor(Math.random() * 4);
+    console.log(randomNumber)
     var randomChosenColour = buttonColours[randomNumber]
     gamePattern.push(randomChosenColour)
+    console.log(gamePattern)
     console.log(randomNumber, randomChosenColour)
     $("#" + randomChosenColour).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
     playSound(randomChosenColour)
@@ -52,6 +56,25 @@ function nextSequence() {
 
 }
 
+function checkAnswer(currentLevel){
+    if(gamePattern[currentLevel] === userClickedPattern[currentLevel])
+    {
+        console.log("successs")
+        //4. If the user got the most recent answer right in step 3, then check that they have finished their sequence with another if statement.
+        if (userClickedPattern.length === gamePattern.length){
+    
+            //5. Call nextSequence() after a 1000 millisecond delay.
+            setTimeout(function () {
+              nextSequence();
+            }, 1000);
+    
+          }
+    } else {
+
+        console.log("wrong");
+  
+      }
+}
 
 
 
