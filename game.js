@@ -22,8 +22,8 @@ $(".btn").click(function() {
      console.log(userClickedPattern)
      playSound(userChosenColour)
      animatePress(userChosenColour)
-     checkAnswer(userClickedPattern.length - 1)
-     console.log(userClickedPattern.length - 1)
+     checkAnswer(userClickedPattern.length-1)
+     console.log(userClickedPattern.length-1)
  })
 
 
@@ -42,6 +42,7 @@ function animatePress(currentColour){
 
 function nextSequence() {
 
+    userClickedPattern = []
     level++
     $("#level-title").text("Level " + level)
     var randomNumber = Math.floor(Math.random() * 4);
@@ -65,14 +66,28 @@ function checkAnswer(currentLevel){
             //5. Call nextSequence() after a 1000 millisecond delay.
             setTimeout(function () {
               nextSequence();
+              console.log("user", userClickedPattern)
+              console.log("user", gamePattern)
             }, 1000);
     
           }
     } else {
 
         console.log("wrong");
-  
+        playSound("wrong")
+        $(document.body).addClass("game-over")
+        setTimeout(function(){
+            $(document.body).removeClass("game-over")
+        }, 200)
+        $("h1").text("Game Over, Press Any Key to Restart")
+        starOver()
       }
+}
+
+function starOver(){
+    level = 0;
+    started = false
+    gamePattern = []
 }
 
 
